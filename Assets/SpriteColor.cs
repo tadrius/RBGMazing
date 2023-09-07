@@ -6,6 +6,8 @@ public class SpriteColor : MonoBehaviour
 {
     bool rActive = true, gActive = true, bActive = true;
 
+    [SerializeField] bool includeInactiveColors = false;
+
     SpriteRenderer spriteRenderer;
     ColorChannels colorChannels;
 
@@ -28,10 +30,18 @@ public class SpriteColor : MonoBehaviour
     {
         float r, g, b;
 
-        r = colorChannels.RActive && rActive ? 1f : 0f;
-        g = colorChannels.GActive && gActive ? 1f : 0f;
-        b = colorChannels.BActive && bActive ? 1f : 0f;
-
+        if (includeInactiveColors)
+        {
+            r = rActive ? 1f : 0f;
+            g = gActive ? 1f : 0f;
+            b = bActive ? 1f : 0f;
+        }
+        else
+        { 
+            r = colorChannels.RActive && rActive ? 1f : 0f;
+            g = colorChannels.GActive && gActive ? 1f : 0f;
+            b = colorChannels.BActive && bActive ? 1f : 0f;
+        }
         spriteRenderer.color = new Color(r, g, b);
     }
 }

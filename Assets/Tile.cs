@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     [SerializeField] bool r = true, g = true, b = true;
+    [SerializeField] SpriteColor inactiveColorIndicator;
 
     SpriteColor color;
 
@@ -20,12 +21,14 @@ public class Tile : MonoBehaviour
     private void Start()
     {
         color.ApplyColors(r, g, b);
+        inactiveColorIndicator.ApplyColors(r, g, b);
     }
 
     // TO-DO - remove Update
     private void Update()
     {
         color.ApplyColors(r, g, b);
+        inactiveColorIndicator.ApplyColors(r, g, b);
     }
 
     public void SetRandomColor()

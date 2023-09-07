@@ -44,4 +44,46 @@ public class ColorChannels : MonoBehaviour
         gActiveOld = gActive;
         bActiveOld = bActive;
     }
+
+    void ActivateColorChannels(bool rActive, bool gActive, bool bActive)
+    {
+        this.rActive = rActive;
+        this.gActive = gActive;
+        this.bActive = bActive;
+    }
+
+    public void ActivateR()
+    {
+        ActivateColorChannels(true, false, false);
+    }
+
+    public void ActivateG()
+    {
+        ActivateColorChannels(false, true, false);
+    }
+
+    public void ActivateB()
+    {
+        ActivateColorChannels(false, false, true);
+    }
+
+    public void ActivateY()
+    {
+        ActivateColorChannels(true, true, false);
+    }
+
+    public void ActivateV()
+    {
+        ActivateColorChannels(true, false, true);
+    }
+
+    public void ActivateC()
+    {
+        ActivateColorChannels(false, true, true);
+    }
+
+    public void ActivateW()
+    {
+        ActivateColorChannels(true, true, true);
+    }
 }

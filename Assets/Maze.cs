@@ -24,5 +24,13 @@ public class Maze : MonoBehaviour
         avatar.Coordinates = startPosition;
         avatar.transform.position = grid.GetTilePositionFromCoordinates(avatar.Coordinates);
         goalIndicator.transform.position = grid.GetTilePositionFromCoordinates(endPosition);
+
+        foreach (Tile tile in grid.Tiles)
+        {
+            if (tile != grid.GetTileFromCoordinates(startPosition) && tile != grid.GetTileFromCoordinates(endPosition))
+            {
+                tile.SetRandomColor();
+            }
+        }
     }
 }

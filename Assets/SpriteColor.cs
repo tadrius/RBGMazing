@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpriteColor : MonoBehaviour
 {
-    bool rActive, gActive, bActive;
+    bool rActive = true, gActive = true, bActive = true;
 
     SpriteRenderer spriteRenderer;
     ColorChannels colorChannels;

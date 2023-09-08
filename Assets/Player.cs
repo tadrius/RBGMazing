@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     PlayerActions actions;
     Avatar avatar;
+    ColorPicker colorPicker;
 
     private void Awake()
     {
@@ -16,14 +17,21 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (actions.moved)
+        if (actions.Moved)
         {
-            avatar.Mover.Move(actions.moveVector);
-            actions.moved = false;
+            Debug.Log($"Moved - x: {actions.MoveVector.x}, y: {actions.MoveVector.y}");
+            avatar.Mover.Move(actions.MoveVector);
+            actions.Moved = false;
         }
-        if (actions.clicked)
+        if (actions.Clicked)
         {
-            actions.clicked = false;
+            Debug.Log($"Clicked - down: {actions.ClickerDown}");
+            actions.Clicked = false;
+        }
+        if (actions.Pointed)
+        {
+            Debug.Log($"Pointed - x: {actions.PointVector.x}, y: {actions.PointVector.y}");
+            actions.Pointed = false;
         }
     }
 

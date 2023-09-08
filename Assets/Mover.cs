@@ -35,7 +35,10 @@ public class Mover : MonoBehaviour
         // return if no direction is indicated
         if (yMove == 0 && xMove == 0) { return; }
 
-        // check if the adjacent tile in the indicated direction is a valid destination
+        // return if the current tile is invalid (matches colors with the avatar)
+        if (avatar.GetMatchingColorCount(grid.TilesByCoordinates[avatar.Coordinates]) > 0) { return; }
+
+        // check if the adjacent tile in the indicated direction is a valid destination (does not match colors with the avatar)
         Vector2Int destinationCoordinates = new Vector2Int(avatar.Coordinates.x + xMove, avatar.Coordinates.y + yMove);
         
         if (grid.TilesByCoordinates.ContainsKey(destinationCoordinates) 

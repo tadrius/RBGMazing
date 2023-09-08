@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SetupManager : MonoBehaviour
 {
+    [SerializeField] float cameraYOffset = 0f;
+
     TileGrid tileGrid;
     Maze maze;
     Camera mainCamera;
@@ -23,7 +25,7 @@ public class SetupManager : MonoBehaviour
             + tileGrid.Tiles[tileGrid.Tiles.Count - 1].transform.position) / 2;
         mainCamera.transform.position = new Vector3(
             gridCenter.x, 
-            gridCenter.y, 
+            gridCenter.y + cameraYOffset, 
             mainCamera.transform.position.z); ;
     }
 }

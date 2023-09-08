@@ -57,9 +57,19 @@ public class ColorChannels : MonoBehaviour
         ActivateColorChannels(true, false, false);
     }
 
+    public void ActivateRG()
+    {
+        ActivateColorChannels(true, true, false);
+    }
+
     public void ActivateG()
     {
         ActivateColorChannels(false, true, false);
+    }
+
+    public void ActivateGB()
+    {
+        ActivateColorChannels(false, true, true);
     }
 
     public void ActivateB()
@@ -67,22 +77,13 @@ public class ColorChannels : MonoBehaviour
         ActivateColorChannels(false, false, true);
     }
 
-    public void ActivateY()
-    {
-        ActivateColorChannels(true, true, false);
-    }
-
-    public void ActivateV()
+    public void ActivateBR()
     {
         ActivateColorChannels(true, false, true);
     }
 
-    public void ActivateC()
-    {
-        ActivateColorChannels(false, true, true);
-    }
 
-    public void ActivateW()
+    public void ActivateRGB()
     {
         ActivateColorChannels(true, true, true);
     }

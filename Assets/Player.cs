@@ -8,30 +8,62 @@ public class Player : MonoBehaviour
     PlayerActions actions;
     Avatar avatar;
     ColorPicker colorPicker;
+    Camera mainCamera;
 
     private void Awake()
     {
         actions = GetComponent<PlayerActions>();
         avatar = GetComponentInChildren<Avatar>();
+        colorPicker = FindObjectOfType<ColorPicker>();
+        mainCamera = FindObjectOfType<Camera>();
     }
 
     private void Update()
     {
         if (actions.Moved)
         {
-            Debug.Log($"Moved - x: {actions.MoveVector.x}, y: {actions.MoveVector.y}");
-            avatar.Mover.Move(actions.MoveVector);
             actions.Moved = false;
+            HandleMove();
+            //Debug.Log($"Moved - x: {actions.MoveVector.x}, y: {actions.MoveVector.y}");
         }
         if (actions.Clicked)
         {
-            Debug.Log($"Clicked - down: {actions.ClickerDown}");
             actions.Clicked = false;
+            //Debug.Log($"Clicked - down: {actions.ClickerDown}");
+            HandleClick();
         }
         if (actions.Pointed)
         {
-            Debug.Log($"Pointed - x: {actions.PointVector.x}, y: {actions.PointVector.y}");
             actions.Pointed = false;
+            //Debug.Log($"Pointed - x: {pointVector.x}, y: {pointVector.y}");
+            HandlePoint();
+        }
+    }
+
+    void HandleMove()
+    {
+        avatar.Mover.Move(actions.MoveVector);
+    }
+
+    void HandleClick()
+    {
+        if (actions.ClickerDown)
+        {
+            colorPicker.enabled = true;
+            HandlePoint();
+        }
+        else
+        {
+            colorPicker.enabled = false;
+        }
+    }
+
+    void HandlePoint()
+    {
+        if (colorPicker.enabled)
+        {
+            Vector2 pointVector = mainCamera.ScreenToWorldPoint(actions.PointVector);
+            colorPicker.PickColor(pointVector);
         }
     }
 

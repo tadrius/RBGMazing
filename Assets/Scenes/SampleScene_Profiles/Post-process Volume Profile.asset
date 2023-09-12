@@ -45,7 +45,7 @@ MonoBehaviour:
     value: 65472
   diffusion:
     overrideState: 1
-    value: 5.96
+    value: 5.74
   anamorphicRatio:
     overrideState: 1
     value: -0.045
@@ -118,28 +118,28 @@ MonoBehaviour:
     value: 0
   tint:
     overrideState: 1
-    value: 15
+    value: 0
   colorFilter:
     overrideState: 1
     value: {r: 1, g: 1, b: 1, a: 1}
   hueShift:
     overrideState: 1
-    value: 5
+    value: 0
   saturation:
     overrideState: 1
     value: -27.5
   brightness:
     overrideState: 1
-    value: 0
+    value: 25
   postExposure:
     overrideState: 1
     value: 0
   contrast:
     overrideState: 1
-    value: 20
+    value: 35
   mixerRedOutRedIn:
     overrideState: 1
-    value: 100
+    value: 65
   mixerRedOutGreenIn:
     overrideState: 1
     value: 0

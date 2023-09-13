@@ -27,14 +27,14 @@ public class Avatar : MonoBehaviour
         color.ApplyColors(r, g, b);
     }
 
-    public int GetMatchingColorCount(Tile tile)
+    public int GetMatchingColorCount(Cell tile)
     {
         int count = 0;
         
-        // ignore colors that are inactive in color channels
+/*        // ignore colors that are inactive in color channels
         if (colorChannels.RActive && r && tile.R) { count++; }
         if (colorChannels.GActive && g && tile.G) { count++; }
-        if (colorChannels.BActive && b && tile.B) { count++; }
+        if (colorChannels.BActive && b && tile.B) { count++; }*/
         
         return count;
     }

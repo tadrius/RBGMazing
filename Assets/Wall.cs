@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile : MonoBehaviour
+public class Wall : MonoBehaviour
 {
     [SerializeField] bool r = true, g = true, b = true;
-    [SerializeField] SpriteColor inactiveColorIndicator;
+    [SerializeField] List<SpriteColor> inactiveColorIndicator = new ();
 
-    SpriteColor color;
+    SpriteColor[] colors;
 
     public bool R { get { return r; } set { r = value; } }
     public bool G { get { return g; } set { g = value; } }
@@ -15,20 +15,31 @@ public class Tile : MonoBehaviour
 
     private void Awake()
     {
-        color = GetComponent<SpriteColor>();
+        colors = GetComponentsInChildren<SpriteColor>();
     }
 
     private void Start()
     {
-        color.ApplyColors(r, g, b);
-        inactiveColorIndicator.ApplyColors(r, g, b);
+        foreach(var item in colors)
+        {
+            item.ApplyColors(r, g, b);
+        }
     }
 
     // TO-DO - remove Update
     private void Update()
     {
-        color.ApplyColors(r, g, b);
-        inactiveColorIndicator.ApplyColors(r, g, b);
+        foreach (var item in colors)
+        {
+            item.ApplyColors(r, g, b);
+        }
+    }
+
+    public void SetColor(bool r, bool g, bool b)
+    {
+        this.r = r;
+        this.g = g;
+        this.b = b;
     }
 
     public void SetRandomColor()

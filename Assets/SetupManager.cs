@@ -6,13 +6,13 @@ public class SetupManager : MonoBehaviour
 {
     [SerializeField] float cameraYOffset = 0f;
 
-    TileGrid tileGrid;
+    CellGrid tileGrid;
     Maze maze;
     Camera mainCamera;
 
     private void Awake()
     {
-        tileGrid = FindObjectOfType<TileGrid>();
+        tileGrid = FindObjectOfType<CellGrid>();
         maze = FindObjectOfType<Maze>();
         mainCamera = FindObjectOfType<Camera>();
     }
@@ -21,8 +21,8 @@ public class SetupManager : MonoBehaviour
     {
         maze.Generate();
         Vector3 gridCenter = 
-            (tileGrid.Tiles[0].transform.position 
-            + tileGrid.Tiles[tileGrid.Tiles.Count - 1].transform.position) / 2;
+            (tileGrid.Cells[0].transform.position 
+            + tileGrid.Cells[tileGrid.Cells.Count - 1].transform.position) / 2;
         mainCamera.transform.position = new Vector3(
             gridCenter.x, 
             gridCenter.y + cameraYOffset, 

@@ -10,11 +10,11 @@ public class Maze : MonoBehaviour
     [SerializeField] Avatar avatar;
     [SerializeField] GameObject goalIndicator;
 
-    TileGrid grid;
+    CellGrid grid;
 
     private void Awake()
     {
-        grid = GetComponent<TileGrid>();
+        grid = GetComponent<CellGrid>();
     }
 
     public void Generate()
@@ -22,15 +22,7 @@ public class Maze : MonoBehaviour
         grid.Generate();
 
         avatar.Coordinates = startPosition;
-        avatar.transform.position = grid.GetTilePositionFromCoordinates(avatar.Coordinates);
-        goalIndicator.transform.position = grid.GetTilePositionFromCoordinates(endPosition);
-
-        foreach (Tile tile in grid.Tiles)
-        {
-            if (tile != grid.GetTileFromCoordinates(startPosition) && tile != grid.GetTileFromCoordinates(endPosition))
-            {
-                tile.SetRandomColor();
-            }
-        }
+        avatar.transform.position = grid.GetCellPositionFromCoordinates(avatar.Coordinates);
+        goalIndicator.transform.position = grid.GetCellPositionFromCoordinates(endPosition);
     }
 }

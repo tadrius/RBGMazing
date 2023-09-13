@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Wall : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class Wall : MonoBehaviour
         }
     }
 
-    // TO-DO - remove Update
+    // TO-DO - replace Update with a method called only when color channels are activated/deactivated
     private void Update()
     {
         foreach (var item in colors)
@@ -35,11 +36,20 @@ public class Wall : MonoBehaviour
         }
     }
 
+    public void SetName(Vector2Int coordinates)
+    {
+        name = $"{name} {coordinates}";
+    }
+
     public void SetColor(bool r, bool g, bool b)
     {
         this.r = r;
         this.g = g;
         this.b = b;
+        foreach (var item in colors)
+        {
+            item.ApplyColors(r, g, b);
+        }
     }
 
     public void SetRandomColor()

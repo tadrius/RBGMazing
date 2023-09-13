@@ -20,9 +20,6 @@ public class CellGrid : MonoBehaviour
     List<Cell> cells;
 
     public Dictionary<Vector2, Cell> CellsByCoordinates { get { return cellsByCoordinates; } }
-    public Dictionary<Vector2, Wall> HorizontalWallsByCoordinates { get { return horizontalWallsByCoordinates; } }
-    public Dictionary<Vector2, Wall> VerticalWallsByCoordinates { get { return verticalWallsByCoordinates; } }
-
     public List<Cell> Cells { get {  return cells; } }
 
     public void Generate()
@@ -53,6 +50,7 @@ public class CellGrid : MonoBehaviour
 
         cells.Add(cell);
         Vector2Int coordinates = new (x, y);
+        cell.SetCoordinates(coordinates);
         cellsByCoordinates.Add(coordinates, cell);
     }
 
@@ -60,13 +58,13 @@ public class CellGrid : MonoBehaviour
     {
         Wall leftWall = GetVerticalWallByCoordinates(x - 1, y);
         Wall rightWall = GetVerticalWallByCoordinates(x, y);
-        Wall topWall = GetHorizontalWallByCoordinates(x, y);
         Wall bottomWall = GetHorizontalWallByCoordinates(x, y - 1);
+        Wall topWall = GetHorizontalWallByCoordinates(x, y);
 
         cell.SetWall(leftWall, Side.Left);
         cell.SetWall(rightWall, Side.Right);
-        cell.SetWall(topWall, Side.Top);
         cell.SetWall(bottomWall, Side.Bottom);
+        cell.SetWall(topWall, Side.Top);
     }
 
     void CreateWalls()
@@ -84,6 +82,7 @@ public class CellGrid : MonoBehaviour
                 wall.transform.localScale *= scale;
 
                 Vector2Int coordinates = new (x, y);
+                wall.SetName(coordinates);
                 verticalWallsByCoordinates.Add(coordinates, wall);
             }
         }
@@ -101,6 +100,7 @@ public class CellGrid : MonoBehaviour
                 wall.transform.localScale *= scale;
 
                 Vector2Int coordinates = new (x, y);
+                wall.SetName(coordinates);
                 horizontalWallsByCoordinates.Add(coordinates, wall);
             }
         }
@@ -118,12 +118,30 @@ public class CellGrid : MonoBehaviour
 
     Wall GetHorizontalWallByCoordinates(int x, int y)
     {
-        Vector2Int coordinates = new Vector2Int(0, y);
+        Vector2Int coordinates = new Vector2Int(x, y);
         if (horizontalWallsByCoordinates.ContainsKey(coordinates))
         {
             return horizontalWallsByCoordinates[coordinates];
         }
         return null;
+    }
+
+    public Wall GetAdjoiningWall(Cell cell1, Cell cell2)
+    {
+        Vector2Int direction = cell2.Coordinates - cell1.Coordinates;
+        if (direction == Vector2Int.up)
+        {
+            return cell1.GetWall(Side.Top);
+        } else if (direction == Vector2Int.down)
+        {
+            return cell1.GetWall(Side.Bottom);
+        } else if (direction == Vector2Int.left)
+        {
+            return cell1.GetWall(Side.Left);
+        } else
+        {
+            return cell1.GetWall(Side.Right);
+        }
     }
 
     public bool ContainsCellCoordinates(Vector2Int coordinates)

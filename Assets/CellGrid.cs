@@ -7,7 +7,7 @@ public class CellGrid : MonoBehaviour
 
     [SerializeField] int cols = 10;
     [SerializeField] int rows = 10;
-    [SerializeField] float scale = 1f;
+    [SerializeField] float cellScale = 1f;
 
     [SerializeField] Cell cellPrefab;
     [SerializeField] Wall horizontalWallPrefab;
@@ -41,10 +41,10 @@ public class CellGrid : MonoBehaviour
     void CreateCell(int x, int y)
     {
         Cell cell = Instantiate(cellPrefab, new Vector3(
-            x * scale,
-            y * scale,
+            x * cellScale * transform.lossyScale.x,
+            y * cellScale * transform.lossyScale.x,
             0), Quaternion.identity, transform);
-        cell.transform.localScale *= scale;
+        cell.transform.localScale *= cellScale;
 
         AssignCellWalls(cell, x, y);
 
@@ -76,10 +76,10 @@ public class CellGrid : MonoBehaviour
             for (int y = 0; y < rows; y++)
             {
                 Wall wall = Instantiate(verticalWallPrefab, new Vector3(
-                    (x - .5f) * scale,
-                    (y) * scale,
+                    (x - .5f)   * cellScale * transform.lossyScale.x,
+                    (y)         * cellScale * transform.lossyScale.x,
                     0), Quaternion.identity, transform);
-                wall.transform.localScale *= scale;
+                wall.transform.localScale *= cellScale;
 
                 Vector2Int coordinates = new (x, y);
                 wall.SetName(coordinates);
@@ -94,10 +94,10 @@ public class CellGrid : MonoBehaviour
             for (int y = 0; y < rows + 1; y++)
             {
                 Wall wall = Instantiate(horizontalWallPrefab, new Vector3(
-                    (x) * scale,
-                    (y - .5f) * scale,
+                    (x)         * cellScale * transform.lossyScale.x,
+                    (y - .5f)   * cellScale * transform.lossyScale.x,
                     0), Quaternion.identity, transform);
-                wall.transform.localScale *= scale;
+                wall.transform.localScale *= cellScale;
 
                 Vector2Int coordinates = new (x, y);
                 wall.SetName(coordinates);

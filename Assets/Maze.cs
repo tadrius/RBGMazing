@@ -12,9 +12,11 @@ public class Maze : MonoBehaviour
 
     CellGrid grid;
 
+    public CellGrid Grid { get { return grid; } }
+
     private void Awake()
     {
-        grid = GetComponent<CellGrid>();
+        grid = GetComponentInChildren<CellGrid>();
     }
 
     public void Generate()

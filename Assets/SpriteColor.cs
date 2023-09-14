@@ -8,7 +8,7 @@ public class SpriteColor : MonoBehaviour
     [SerializeField] bool includeInactiveColors = false;
 
     SpriteRenderer spriteRenderer;
-    ColorChannelActivator colorChannelActivator;
+    ColorShifter colorShifter;
 
     public bool R { get { return r; } set { r = value; } }
     public bool G { get { return g; } set { g = value; } }
@@ -17,7 +17,7 @@ public class SpriteColor : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        colorChannelActivator = FindObjectOfType<ColorChannelActivator>();
+        colorShifter = FindObjectOfType<ColorShifter>();
     }
 
     public void ApplyColors(bool r, bool g, bool b)
@@ -41,9 +41,9 @@ public class SpriteColor : MonoBehaviour
         }
         else
         { 
-            rAmount = colorChannelActivator.RActive && r ? 1f : 0f;
-            gAmount = colorChannelActivator.GActive && g ? 1f : 0f;
-            bAmount = colorChannelActivator.BActive && b ? 1f : 0f;
+            rAmount = colorShifter.RActive && r ? 1f : 0f;
+            gAmount = colorShifter.GActive && g ? 1f : 0f;
+            bAmount = colorShifter.BActive && b ? 1f : 0f;
         }
         spriteRenderer.color = new Color(rAmount, gAmount, bAmount);
     }
@@ -53,9 +53,9 @@ public class SpriteColor : MonoBehaviour
         int count = 0;
 
         // ignore colors that are inactive in color channels
-        if (colorChannelActivator.RActive && r && other.R) { count++; }
-        if (colorChannelActivator.GActive && g && other.G) { count++; }
-        if (colorChannelActivator.BActive && b && other.B) { count++; }
+        if (colorShifter.RActive && r && other.R) { count++; }
+        if (colorShifter.GActive && g && other.G) { count++; }
+        if (colorShifter.BActive && b && other.B) { count++; }
 
         return count;
     }

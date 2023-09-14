@@ -14,13 +14,13 @@ public class ColorPicker : MonoBehaviour
     [SerializeField] Vector2 brAngleRange;
 
     float indicatorAngle;
-    ColorChannelActivator channels;
+    ColorShifter shifter;
 
     public Transform Indicator { get { return indicator; } }
 
     private void Awake()
     {
-        channels = GetComponent<ColorChannelActivator>();
+        shifter = GetComponent<ColorShifter>();
     }
 
     private void Start()
@@ -64,32 +64,32 @@ public class ColorPicker : MonoBehaviour
     {
         RotateIndicator(Vector2.SignedAngle(indicator.localPosition, Vector2.down));
         CalculateIndicatorAngle();
-        channels.ActivateRGB();
+        shifter.ActivateRGB();
     }
 
     void PickColor()
     {
         if (indicatorAngle >= rAngleRange.x &&  indicatorAngle < rAngleRange.y)
         {
-            channels.ActivateR();
+            shifter.ActivateR();
         } else if (indicatorAngle >= rgAngleRange.x && indicatorAngle < rgAngleRange.y)
         {
-            channels.ActivateRG();
+            shifter.ActivateRG();
         } else if (indicatorAngle >= gAngleRange.x && indicatorAngle < gAngleRange.y)
         {
-            channels.ActivateG();
+            shifter.ActivateG();
         } else if (indicatorAngle >= gbAngleRange.x && indicatorAngle < gbAngleRange.y)
         {
-            channels.ActivateGB();
+            shifter.ActivateGB();
         } else if (indicatorAngle >= bAngleRange.x && indicatorAngle < bAngleRange.y)
         {
-            channels.ActivateB();
+            shifter.ActivateB();
         } else if (indicatorAngle >= brAngleRange.x && indicatorAngle < brAngleRange.y)
         {
-            channels.ActivateBR();
+            shifter.ActivateBR();
         } else
         {
-            channels.ActivateRGB();
+            shifter.ActivateRGB();
         }
     }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorChannelActivator : MonoBehaviour
+public class ColorShifter : MonoBehaviour
 {
 
     [SerializeField] bool rActive = true, gActive = true, bActive = true;

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5036603437525162817
 Transform:
   m_ObjectHideFlags: 0
@@ -202,7 +202,7 @@ Transform:
   - {fileID: 5036603437525162817}
   - {fileID: 1587080961516379079}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2431675638498983150
 SpriteRenderer:
@@ -268,6 +268,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d97079ca6f0504584a6803aa6002ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  r: 1
+  g: 1
+  b: 1
   includeInactiveColors: 0
 --- !u!114 &612326975804462287
 MonoBehaviour:
@@ -281,9 +284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 410f0410d6559684c9b8a85c38bdaa95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  r: 1
-  g: 1
-  b: 1
 --- !u!114 &4844264741159677183
 MonoBehaviour:
   m_ObjectHideFlags: 0

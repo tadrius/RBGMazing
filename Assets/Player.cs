@@ -5,15 +5,15 @@ using UnityEngine.Scripting.APIUpdating;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] Avatar avatar;
+
     PlayerActions actions;
-    Avatar avatar;
     ColorPicker colorPicker;
     Camera mainCamera;
 
     private void Awake()
     {
         actions = GetComponent<PlayerActions>();
-        avatar = GetComponentInChildren<Avatar>();
         colorPicker = FindObjectOfType<ColorPicker>();
         mainCamera = FindObjectOfType<Camera>();
     }

@@ -4,28 +4,32 @@ using UnityEngine;
 
 public class SetupManager : MonoBehaviour
 {
-    [SerializeField] float cameraYOffset = 0f;
 
-    CellGrid tileGrid;
+    [SerializeField] float mazeYOffset = 0f;
+    
     Maze maze;
-    Camera mainCamera;
 
     private void Awake()
     {
-        tileGrid = FindObjectOfType<CellGrid>();
         maze = FindObjectOfType<Maze>();
-        mainCamera = FindObjectOfType<Camera>();
     }
 
     private void Start()
     {
         maze.Generate();
-        Vector3 gridCenter = 
-            (tileGrid.Cells[0].transform.position 
-            + tileGrid.Cells[tileGrid.Cells.Count - 1].transform.position) / 2;
-        mainCamera.transform.position = new Vector3(
-            gridCenter.x, 
-            gridCenter.y + cameraYOffset, 
-            mainCamera.transform.position.z); ;
+    }
+
+    private void Update()
+    {
+        RepositionMaze();
+    }
+
+    void RepositionMaze()
+    {
+        Vector3 gridLocalCenter =
+            (maze.Grid.Cells[0].transform.localPosition
+                + maze.Grid.Cells[^1].transform.localPosition) 
+                / 2;
+        maze.transform.position = (-gridLocalCenter * maze.transform.localScale.x) + new Vector3(0f, mazeYOffset);
     }
 }

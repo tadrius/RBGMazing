@@ -6,7 +6,6 @@ using static UnityEditor.Progress;
 public class Wall : MonoBehaviour
 {
     [SerializeField] bool r = true, g = true, b = true;
-    [SerializeField] List<SpriteColor> inactiveColorIndicator = new ();
 
     SpriteColor[] colors;
 

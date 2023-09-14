@@ -35,28 +35,33 @@ public class Mover : MonoBehaviour
         // return if no direction is indicated
         if (yMove == 0 && xMove == 0) { return; }
 
-        // return if the current tile is invalid (matches colors with the avatar)
-        if (avatar.GetMatchingColorCount(grid.CellsByCoordinates[avatar.Coordinates]) > 0) { return; }
-
         // check if the adjacent tile in the indicated direction is a valid destination (does not match colors with the avatar)
-        Vector2Int destinationCoordinates = new Vector2Int(avatar.Coordinates.x + xMove, avatar.Coordinates.y + yMove);
+        Vector2Int destinationCoordinates = new (avatar.Coordinates.x + xMove, avatar.Coordinates.y + yMove);
         
         if (grid.CellsByCoordinates.ContainsKey(destinationCoordinates) 
-            && avatar.GetMatchingColorCount(grid.CellsByCoordinates[destinationCoordinates]) <= 0)
+            && !PathIsBlocked(avatar, destinationCoordinates))
         {
-            
+
             // find the furthest valid destination in the indicated direction
-            Vector2Int candidateCoordinates = new Vector2Int(destinationCoordinates.x + xMove, destinationCoordinates.y + yMove);
+            /*Vector2Int candidateCoordinates = new Vector2Int(destinationCoordinates.x + xMove, destinationCoordinates.y + yMove);
             while (grid.CellsByCoordinates.ContainsKey(candidateCoordinates) 
-                && avatar.GetMatchingColorCount(grid.CellsByCoordinates[candidateCoordinates]) <= 0)
+                && !PathIsBlocked(avatar, destinationCoordinates))
             {
                 destinationCoordinates = new Vector2Int(candidateCoordinates.x, candidateCoordinates.y);
                 candidateCoordinates += new Vector2Int(xMove, yMove);
-            }
+            }*/
 
             // move to the furthest valid destination 
             transform.position = grid.GetCellPositionFromCoordinates(destinationCoordinates);
             avatar.Coordinates = destinationCoordinates;
         }
+    }
+
+    bool PathIsBlocked(Avatar avatar, Vector2Int destinationCoordinates)
+    {
+        Wall wall = grid.GetAdjoiningWall(
+            grid.GetCellFromCoordinates(avatar.Coordinates),
+            grid.GetCellFromCoordinates(destinationCoordinates));
+        return 0 < avatar.GetMatchingColorCount(wall);
     }
 }

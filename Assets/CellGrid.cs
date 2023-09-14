@@ -56,10 +56,10 @@ public class CellGrid : MonoBehaviour
 
     void AssignCellWalls(Cell cell, int x, int y)
     {
-        Wall leftWall = GetVerticalWallByCoordinates(x - 1, y);
-        Wall rightWall = GetVerticalWallByCoordinates(x, y);
-        Wall bottomWall = GetHorizontalWallByCoordinates(x, y - 1);
-        Wall topWall = GetHorizontalWallByCoordinates(x, y);
+        Wall leftWall = GetVerticalWallByCoordinates(x, y);
+        Wall rightWall = GetVerticalWallByCoordinates(x + 1, y);
+        Wall bottomWall = GetHorizontalWallByCoordinates(x, y);
+        Wall topWall = GetHorizontalWallByCoordinates(x, y + 1);
 
         cell.SetWall(leftWall, Side.Left);
         cell.SetWall(rightWall, Side.Right);
@@ -71,12 +71,12 @@ public class CellGrid : MonoBehaviour
     {
         // vertical walls
         verticalWallsByCoordinates = new Dictionary<Vector2, Wall>();
-        for (int x = 0; x < cols - 1; x++)
+        for (int x = 0; x < cols + 1; x++)
         {
             for (int y = 0; y < rows; y++)
             {
                 Wall wall = Instantiate(verticalWallPrefab, new Vector3(
-                    (x + .5f) * scale,
+                    (x - .5f) * scale,
                     (y) * scale,
                     0), Quaternion.identity, transform);
                 wall.transform.localScale *= scale;
@@ -91,11 +91,11 @@ public class CellGrid : MonoBehaviour
         horizontalWallsByCoordinates = new Dictionary<Vector2, Wall>();
         for (int x = 0; x < cols; x++)
         {
-            for (int y = 0; y < rows - 1; y++)
+            for (int y = 0; y < rows + 1; y++)
             {
                 Wall wall = Instantiate(horizontalWallPrefab, new Vector3(
                     (x) * scale,
-                    (y + .5f) * scale,
+                    (y - .5f) * scale,
                     0), Quaternion.identity, transform);
                 wall.transform.localScale *= scale;
 
@@ -108,7 +108,7 @@ public class CellGrid : MonoBehaviour
 
     Wall GetVerticalWallByCoordinates(int x, int y)
     {
-        Vector2Int coordinates = new Vector2Int(x, y);
+        Vector2Int coordinates = new (x, y);
         if (verticalWallsByCoordinates.ContainsKey(coordinates))
         {
             return verticalWallsByCoordinates[coordinates];
@@ -118,7 +118,7 @@ public class CellGrid : MonoBehaviour
 
     Wall GetHorizontalWallByCoordinates(int x, int y)
     {
-        Vector2Int coordinates = new Vector2Int(x, y);
+        Vector2Int coordinates = new (x, y);
         if (horizontalWallsByCoordinates.ContainsKey(coordinates))
         {
             return horizontalWallsByCoordinates[coordinates];

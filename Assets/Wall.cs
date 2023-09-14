@@ -5,34 +5,25 @@ using static UnityEditor.Progress;
 
 public class Wall : MonoBehaviour
 {
-    [SerializeField] bool r = true, g = true, b = true;
+    [SerializeField] SpriteColor mainColor;
+    SpriteColor[] allColors;
 
-    SpriteColor[] colors;
-
-    public bool R { get { return r; } set { r = value; } }
-    public bool G { get { return g; } set { g = value; } }
-    public bool B { get { return b; } set { b = value; } }
+    public SpriteColor MainColor { get { return mainColor; } }
 
     private void Awake()
     {
-        colors = GetComponentsInChildren<SpriteColor>();
+        allColors = GetComponentsInChildren<SpriteColor>();
     }
 
     private void Start()
     {
-        foreach(var item in colors)
-        {
-            item.ApplyColors(r, g, b);
-        }
+        SetAllColors(mainColor.R, mainColor.G, mainColor.B);
     }
 
-    // TO-DO - replace Update with a method called only when color channels are activated/deactivated
+    // TO-DO - remove Update after testing (colors only need updating when Maze is made)
     private void Update()
     {
-        foreach (var item in colors)
-        {
-            item.ApplyColors(r, g, b);
-        }
+        SetAllColors(mainColor.R, mainColor.G, mainColor.B);
     }
 
     public void SetName(Vector2Int coordinates)
@@ -40,21 +31,11 @@ public class Wall : MonoBehaviour
         name = $"{name} {coordinates}";
     }
 
-    public void SetColor(bool r, bool g, bool b)
+    public void SetAllColors(bool r, bool g, bool b)
     {
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        foreach (var item in colors)
+        foreach (var item in allColors)
         {
             item.ApplyColors(r, g, b);
         }
-    }
-
-    public void SetRandomColor()
-    {
-        r = Random.Range(0, 2) == 1;
-        g = Random.Range(0, 2) == 1;
-        b = Random.Range(0, 2) == 1;
     }
 }

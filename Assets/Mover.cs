@@ -62,6 +62,6 @@ public class Mover : MonoBehaviour
         Wall wall = grid.GetAdjoiningWall(
             grid.GetCellFromCoordinates(avatar.Coordinates),
             grid.GetCellFromCoordinates(destinationCoordinates));
-        return 0 < avatar.GetMatchingColorCount(wall);
+        return 0 < avatar.Color.GetMatchingColorCount(wall.MainColor);
     }
 }

@@ -71,7 +71,6 @@ public class Maze : MonoBehaviour
             // if the walk reaches the path, a loop forms; remove the loop before continuing
             if (path.Contains(nextCell))
             {
-                Debug.Log("Loop found");
                 int loopStartIndex = path.IndexOf(nextCell);
                 path.RemoveRange(loopStartIndex, path.Count - loopStartIndex);
             }
@@ -83,7 +82,7 @@ public class Maze : MonoBehaviour
         for (int i = 0; i < path.Count - 1; i++)
         {
             Wall wall = grid.GetAdjoiningWall(path[i], path[i + 1]);
-            wall.SetColor(false, false, false);
+            wall.SetAllColors(false, false, false);
         }
 
         // remove from remaining cells

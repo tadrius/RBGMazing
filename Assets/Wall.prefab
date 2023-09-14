@@ -46,13 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ef4b40d7bb00140ba07e7aaf2dd126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  r: 1
-  g: 1
-  b: 1
-  inactiveColorIndicator:
-  - {fileID: 1644173814408250479}
-  - {fileID: 0}
-  - {fileID: 0}
+  mainColor: {fileID: 4733037297586724877}
 --- !u!1 &2238352189193457448
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +57,6 @@ GameObject:
   m_Component:
   - component: {fileID: 627294380653644351}
   - component: {fileID: 8516524447690061181}
-  - component: {fileID: 8440121117028457881}
   - component: {fileID: 4733037297586724877}
   m_Layer: 0
   m_Name: Sprite
@@ -139,22 +132,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8440121117028457881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2238352189193457448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7c48f4ba6d758b4a9d45e5a35346b78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  topWall: {fileID: 0}
-  bottomWall: {fileID: 0}
-  leftWall: {fileID: 0}
-  rightWall: {fileID: 0}
 --- !u!114 &4733037297586724877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,6 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d97079ca6f0504584a6803aa6002ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  r: 1
+  g: 1
+  b: 1
   includeInactiveColors: 0
 --- !u!1 &4179791406268090523
 GameObject:
@@ -265,4 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d97079ca6f0504584a6803aa6002ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  r: 1
+  g: 1
+  b: 1
   includeInactiveColors: 1

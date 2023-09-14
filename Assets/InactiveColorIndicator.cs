@@ -5,11 +5,11 @@ using UnityEngine;
 public class InactiveColorIndicator : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
-    ColorChannels colorChannels;
+    ColorChannelActivator colorChannels;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        colorChannels = FindObjectOfType<ColorChannels>();
+        colorChannels = FindObjectOfType<ColorChannelActivator>();
     }
 }

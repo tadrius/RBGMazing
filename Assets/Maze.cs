@@ -20,7 +20,9 @@ public class Maze : MonoBehaviour
     public void Generate()
     {
         grid.Generate();
-        CreateMaze();
+        CreateMaze(new ColorChannels(true, false, false));
+        CreateMaze(new ColorChannels(false, true, false));
+        CreateMaze(new ColorChannels(false, false, true));
 
         avatar.Coordinates = startPosition;
         avatar.transform.position = grid.GetCellPositionFromCoordinates(avatar.Coordinates);
@@ -28,7 +30,8 @@ public class Maze : MonoBehaviour
     }
 
     // using Wilson's algorithm (https://en.wikipedia.org/wiki/Maze_generation_algorithm)
-    void CreateMaze()
+    // pathColorChannels determines which colors will be applied to walls along the generated path
+    void CreateMaze(ColorChannels pathColorChannels)
     {
         List<Cell> remainingCells = new (grid.Cells);
         List<Cell> mazeCells = new ();
@@ -40,11 +43,11 @@ public class Maze : MonoBehaviour
 
         while (remainingCells.Count > 0)
         {
-            mazeCells.AddRange(CreatePath(remainingCells, mazeCells));
+            mazeCells.AddRange(CreatePath(remainingCells, mazeCells, pathColorChannels));
         }
     }
 
-    List<Cell> CreatePath(List<Cell> remainingCells, List<Cell> mazeCells)
+    List<Cell> CreatePath(List<Cell> remainingCells, List<Cell> mazeCells, ColorChannels pathColorChannels)
     {
         // start the path at an arbitrary cell
         List<Cell> path = new();
@@ -82,7 +85,12 @@ public class Maze : MonoBehaviour
         for (int i = 0; i < path.Count - 1; i++)
         {
             Wall wall = grid.GetAdjoiningWall(path[i], path[i + 1]);
-            wall.SetAllColors(false, false, false);
+            SpriteColor wallColor = wall.MainColor;
+            wall.SetAllColors(
+                !wallColor.R || pathColorChannels.red,
+                !wallColor.G || pathColorChannels.green,
+                !wallColor.B || pathColorChannels.blue
+                );
         }
 
         // remove from remaining cells

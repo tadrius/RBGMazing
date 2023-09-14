@@ -14,13 +14,13 @@ public class ColorPicker : MonoBehaviour
     [SerializeField] Vector2 brAngleRange;
 
     float indicatorAngle;
-    ColorChannels channels;
+    ColorChannelActivator channels;
 
     public Transform Indicator { get { return indicator; } }
 
     private void Awake()
     {
-        channels = GetComponent<ColorChannels>();
+        channels = GetComponent<ColorChannelActivator>();
     }
 
     private void Start()

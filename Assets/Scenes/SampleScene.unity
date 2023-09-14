@@ -362,7 +362,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2050573850}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ColorChannels, Assembly-CSharp
         m_MethodName: ActivateRGB
         m_Mode: 1
@@ -538,7 +538,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.22745098, g: 0.22745098, b: 0.22745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -858,7 +858,7 @@ MonoBehaviour:
   rows: 6
   scale: 1.25
   cellPrefab: {fileID: 5653704920447500389, guid: ecb1c83b1f0efae40bbdb0a42654d806, type: 3}
-  horizontalWallPrefab: {fileID: 6500458683349746008, guid: b83c7566bb3a4ec45930427679a0bc4e, type: 3}
+  horizontalWallPrefab: {fileID: 7645542182724995493, guid: b83c7566bb3a4ec45930427679a0bc4e, type: 3}
   verticalWallPrefab: {fileID: 1765667138467142413, guid: 50dafc3757eb5f14e861ca7cb838fbdd, type: 3}
 --- !u!114 &684772319
 MonoBehaviour:
@@ -873,7 +873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPosition: {x: 0, y: 0}
-  endPosition: {x: 1, y: 1}
+  endPosition: {x: 5, y: 5}
   avatar: {fileID: 1524395313}
   goalIndicator: {fileID: 1244481842}
 --- !u!1 &714953408
@@ -1119,7 +1119,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2050573850}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ColorChannels, Assembly-CSharp
         m_MethodName: ActivateR
         m_Mode: 1
@@ -1790,7 +1790,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2050573850}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ColorChannels, Assembly-CSharp
         m_MethodName: ActivateBR
         m_Mode: 1
@@ -2051,7 +2051,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2050573850}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ColorChannels, Assembly-CSharp
         m_MethodName: ActivateG
         m_Mode: 1
@@ -2160,7 +2160,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2050573850}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ColorChannels, Assembly-CSharp
         m_MethodName: ActivateB
         m_Mode: 1
@@ -2412,7 +2412,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2050573850}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ColorChannels, Assembly-CSharp
         m_MethodName: ActivateRG
         m_Mode: 1
@@ -2470,6 +2470,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d97079ca6f0504584a6803aa6002ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  r: 1
+  g: 1
+  b: 1
   includeInactiveColors: 0
 --- !u!212 &1594402677
 SpriteRenderer:
@@ -2762,7 +2765,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2050573850}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ColorChannels, Assembly-CSharp
         m_MethodName: ActivateGB
         m_Mode: 1
@@ -3403,7 +3406,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2050573845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f61eafc5a60e3044c95d5c354201abfe, type: 3}
+  m_Script: {fileID: 11500000, guid: 6528d3a636d31f541a25542634abd97e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rActive: 1

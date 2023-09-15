@@ -18,17 +18,26 @@ public class CellGrid : MonoBehaviour
     Dictionary<Vector2, Wall> verticalWallsByCoordinates;
 
     List<Cell> cells;
+    List<Wall> walls;
 
     public Dictionary<Vector2, Cell> CellsByCoordinates { get { return cellsByCoordinates; } }
     public List<Cell> Cells { get {  return cells; } }
 
-    public void Generate()
+    public void Generate(int cols, int rows)
     {
+        // reuse the existing grid if the size is the same
+        if ((this.cols == cols) && (this.rows == rows) && (cells.Count > 0)) {
+            // reset all walls
+            ResetWalls();
+            return; 
+        }
+
+        // otherwise clear the existing grid and create a new one
+        Clear();
+
+        this.cols = cols;
+        this.rows = rows;
         CreateWalls();
-
-        cellsByCoordinates = new Dictionary<Vector2, Cell>();
-        cells = new List<Cell>();
-
         for (int x = 0; x < cols; x++)
         {
             for (int y = 0; y < rows; y++)
@@ -36,6 +45,27 @@ public class CellGrid : MonoBehaviour
                 CreateCell(x, y);
             }
         }
+    }
+
+    void ResetWalls()
+    {
+        foreach(Wall wall in walls)
+        {
+            wall.MainColor.ApplyColors(true, true, true);
+        }
+    }
+
+    void Clear()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Destroy(transform.GetChild(i).gameObject);
+        }
+        cells = new();
+        walls = new();
+        cellsByCoordinates = new();
+        horizontalWallsByCoordinates = new();
+        verticalWallsByCoordinates = new();
     }
 
     void CreateCell(int x, int y)
@@ -70,7 +100,6 @@ public class CellGrid : MonoBehaviour
     void CreateWalls()
     {
         // vertical walls
-        verticalWallsByCoordinates = new Dictionary<Vector2, Wall>();
         for (int x = 0; x < cols + 1; x++)
         {
             for (int y = 0; y < rows; y++)
@@ -84,11 +113,11 @@ public class CellGrid : MonoBehaviour
                 Vector2Int coordinates = new (x, y);
                 wall.SetName(coordinates);
                 verticalWallsByCoordinates.Add(coordinates, wall);
+                walls.Add(wall);
             }
         }
 
         // horizontal walls
-        horizontalWallsByCoordinates = new Dictionary<Vector2, Wall>();
         for (int x = 0; x < cols; x++)
         {
             for (int y = 0; y < rows + 1; y++)
@@ -102,6 +131,7 @@ public class CellGrid : MonoBehaviour
                 Vector2Int coordinates = new (x, y);
                 wall.SetName(coordinates);
                 horizontalWallsByCoordinates.Add(coordinates, wall);
+                walls.Add(wall);
             }
         }
     }

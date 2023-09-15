@@ -678,6 +678,7 @@ GameObject:
   m_Component:
   - component: {fileID: 515553762}
   - component: {fileID: 515553763}
+  - component: {fileID: 515553764}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -713,6 +714,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mazeYOffset: 0.6
+--- !u!114 &515553764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515553761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93891e05d3b6618449d161d222e5e2d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levels:
+  - cellColumns: 3
+    cellRows: 3
+    mazeClearLayers:
+    - red: 1
+      green: 1
+      blue: 0
+    - red: 0
+      green: 0
+      blue: 1
+  beyondLevel:
+    cellColumns: 0
+    cellRows: 0
+    mazeClearLayers: []
+  currentLevel: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,7 +1232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPosition: {x: 0, y: 0}
-  endPosition: {x: 5, y: 5}
+  endPosition: {x: 1, y: 1}
   avatar: {fileID: 1524395313}
   goalIndicator: {fileID: 1244481842}
 --- !u!1 &714953408

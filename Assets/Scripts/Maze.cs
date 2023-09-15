@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Maze : MonoBehaviour
@@ -19,12 +20,14 @@ public class Maze : MonoBehaviour
         grid = GetComponentInChildren<CellGrid>();
     }
 
-    public void Generate()
+    public void Generate(Level level)
     {
-        grid.Generate();
-        CreateMaze(new ColorChannels(true, false, false));
-        CreateMaze(new ColorChannels(false, true, false));
-        CreateMaze(new ColorChannels(false, false, true));
+        grid.Generate(level.cellColumns, level.cellRows);
+
+        foreach (ColorChannels mazeLayer in level.mazeClearLayers)
+        {
+            DrawMaze(mazeLayer);
+        }
 
         avatar.Coordinates = startPosition;
         avatar.transform.position = grid.GetCellPositionFromCoordinates(avatar.Coordinates);
@@ -32,8 +35,8 @@ public class Maze : MonoBehaviour
     }
 
     // using Wilson's algorithm (https://en.wikipedia.org/wiki/Maze_generation_algorithm)
-    // pathColorChannels determines which colors will be applied to walls along the generated path
-    void CreateMaze(ColorChannels pathColorChannels)
+    // pathClearChannels determines which color channels will be removed from walls along paths
+    void DrawMaze(ColorChannels pathClearChannels)
     {
         List<Cell> remainingCells = new (grid.Cells);
         List<Cell> mazeCells = new ();
@@ -45,11 +48,11 @@ public class Maze : MonoBehaviour
 
         while (remainingCells.Count > 0)
         {
-            mazeCells.AddRange(CreatePath(remainingCells, mazeCells, pathColorChannels));
+            mazeCells.AddRange(CreatePath(remainingCells, mazeCells, pathClearChannels));
         }
     }
 
-    List<Cell> CreatePath(List<Cell> remainingCells, List<Cell> mazeCells, ColorChannels pathColorChannels)
+    List<Cell> CreatePath(List<Cell> remainingCells, List<Cell> mazeCells, ColorChannels pathClearChannels)
     {
         // start the path at an arbitrary cell
         List<Cell> path = new();
@@ -83,17 +86,8 @@ public class Maze : MonoBehaviour
             cell = nextCell;
         }
 
-        // clear walls
-        for (int i = 0; i < path.Count - 1; i++)
-        {
-            Wall wall = grid.GetAdjoiningWall(path[i], path[i + 1]);
-            SpriteColor wallColor = wall.MainColor;
-            wall.SetAllColors(
-                !wallColor.R || pathColorChannels.red,
-                !wallColor.G || pathColorChannels.green,
-                !wallColor.B || pathColorChannels.blue
-                );
-        }
+
+        ClearPathWalls(path, pathClearChannels);
 
         // remove from remaining cells
         foreach (Cell pathCell in path)
@@ -103,6 +97,22 @@ public class Maze : MonoBehaviour
 
         // return the path
         return path;
+    }
+
+    void ClearPathWalls(List<Cell> path, ColorChannels pathClearChannels)
+    {
+        // clear walls
+        for (int i = 0; i < path.Count - 1; i++)
+        {
+            Wall wall = grid.GetAdjoiningWall(path[i], path[i + 1]);
+            SpriteColor wallColor = wall.MainColor;
+
+            wall.SetAllColors(
+                wallColor.R && !pathClearChannels.red,
+                wallColor.G && !pathClearChannels.green,
+                wallColor.B && !pathClearChannels.blue
+            );
+        }
     }
 
     List<Vector2Int> CreateDirections()

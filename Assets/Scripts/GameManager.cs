@@ -7,16 +7,18 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] float mazeYOffset = 0f;
     
+    LevelManager levelManager;
     Maze maze;
 
     private void Awake()
     {
         maze = FindObjectOfType<Maze>();
+        levelManager = GetComponent<LevelManager>();
     }
 
     private void Start()
     {
-        maze.Generate();
+        maze.Generate(levelManager.GetCurrentLevel());
     }
 
     private void Update()
@@ -26,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     void RepositionMaze()
     {
+        if (maze.Grid.Cells.Count <= 0) { return; }
         Vector3 gridLocalCenter =
             (maze.Grid.Cells[0].transform.localPosition
                 + maze.Grid.Cells[^1].transform.localPosition) 

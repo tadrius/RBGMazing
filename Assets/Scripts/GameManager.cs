@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SetupManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
 
     [SerializeField] float mazeYOffset = 0f;

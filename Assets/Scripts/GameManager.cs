@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] [Range(0.0001f, 2f)] float mazeScreenProportion = 1f;
     [SerializeField] float mazeScaleConstant = 1f;
     [SerializeField] float mazeYOffset = 0f;
-    
+
+    ColorPicker colorPicker;
     LevelManager levelManager;
     Maze maze;
 
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
     {
         maze = FindObjectOfType<Maze>();
         levelManager = GetComponent<LevelManager>();
+        colorPicker = FindObjectOfType<ColorPicker>();
     }
 
     private void Start()
@@ -27,6 +29,17 @@ public class GameManager : MonoBehaviour
     {
         RescaleMaze();
         RepositionMaze();
+        if (MazeComplete())
+        {
+            levelManager.IncreaseCurrentLevel();
+            maze.Generate(levelManager.GetCurrentLevel());
+            colorPicker.Reset();
+        }
+    }
+
+    bool MazeComplete()
+    {
+        return maze.GoalReached();
     }
 
     void RepositionMaze()

@@ -29,6 +29,11 @@ public class ColorPicker : MonoBehaviour
         enabled = false;
     }
 
+    public void Reset()
+    {
+        PickDefault();
+    }
+
     public void PickColor(Vector2 pointerPosition)
     {
         Vector2 relativePointerPosition = pointerPosition - new Vector2(transform.position.x, transform.position.y); // get pointer position relative to the color picker

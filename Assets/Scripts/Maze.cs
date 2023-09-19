@@ -29,8 +29,11 @@ public class Maze : MonoBehaviour
             DrawMaze(mazeLayer);
         }
 
+        // TODO - improve startPosition and endPosition selection
         avatar.Coordinates = startPosition;
         avatar.transform.position = grid.GetCellPositionFromCoordinates(avatar.Coordinates);
+
+        endPosition = new Vector2Int(level.cellColumns - 1, level.cellRows - 1);
         goalIndicator.transform.position = grid.GetCellPositionFromCoordinates(endPosition);
     }
 
@@ -118,5 +121,10 @@ public class Maze : MonoBehaviour
     List<Vector2Int> CreateDirections()
     {
         return new List<Vector2Int>() { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
+    }
+
+    public bool GoalReached()
+    {
+        return avatar.Coordinates == endPosition;
     }
 }

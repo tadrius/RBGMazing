@@ -729,7 +729,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 0
-  levels: []
+  levels:
+  - cellColumns: 2
+    cellRows: 2
+    mazeClearLayers:
+    - red: 1
+      green: 1
+      blue: 1
+  - cellColumns: 3
+    cellRows: 3
+    mazeClearLayers:
+    - red: 1
+      green: 1
+      blue: 1
+  - cellColumns: 3
+    cellRows: 3
+    mazeClearLayers:
+    - red: 1
+      green: 0
+      blue: 0
+    - red: 0
+      green: 1
+      blue: 1
+  - cellColumns: 4
+    cellRows: 4
+    mazeClearLayers:
+    - red: 1
+      green: 0
+      blue: 1
+    - red: 0
+      green: 1
+      blue: 0
+  - cellColumns: 4
+    cellRows: 4
+    mazeClearLayers:
+    - red: 1
+      green: 1
+      blue: 0
+    - red: 0
+      green: 1
+      blue: 1
+  - cellColumns: 5
+    cellRows: 5
+    mazeClearLayers:
+    - red: 1
+      green: 0
+      blue: 1
+    - red: 0
+      green: 1
+      blue: 1
   beyondLevel:
     cellColumns: 10
     cellRows: 10

@@ -679,6 +679,7 @@ GameObject:
   - component: {fileID: 515553762}
   - component: {fileID: 515553763}
   - component: {fileID: 515553764}
+  - component: {fileID: 515553765}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -730,23 +731,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLevel: 0
   levels:
+  - cellColumns: 3
+    cellRows: 1
+    mazeClearLayers:
+    - red: 1
+      green: 1
+      blue: 1
   - cellColumns: 2
     cellRows: 2
     mazeClearLayers:
     - red: 1
       green: 1
       blue: 1
+  - cellColumns: 2
+    cellRows: 2
+    mazeClearLayers:
+    - red: 1
+      green: 0
+      blue: 1
   - cellColumns: 3
     cellRows: 3
     mazeClearLayers:
-    - red: 1
+    - red: 0
       green: 1
       blue: 1
   - cellColumns: 3
     cellRows: 3
     mazeClearLayers:
     - red: 1
-      green: 0
+      green: 1
       blue: 0
     - red: 0
       green: 1
@@ -759,24 +772,69 @@ MonoBehaviour:
       blue: 1
     - red: 0
       green: 1
-      blue: 0
+      blue: 1
   - cellColumns: 4
     cellRows: 4
     mazeClearLayers:
     - red: 1
-      green: 1
-      blue: 0
+      green: 0
+      blue: 1
     - red: 0
       green: 1
-      blue: 1
+      blue: 0
   - cellColumns: 5
     cellRows: 5
     mazeClearLayers:
     - red: 1
+      green: 1
+      blue: 0
+    - red: 0
       green: 0
       blue: 1
+  - cellColumns: 5
+    cellRows: 5
+    mazeClearLayers:
     - red: 0
       green: 1
+      blue: 0
+    - red: 0
+      green: 0
+      blue: 1
+  - cellColumns: 6
+    cellRows: 6
+    mazeClearLayers:
+    - red: 1
+      green: 0
+      blue: 0
+    - red: 0
+      green: 1
+      blue: 0
+    - red: 0
+      green: 0
+      blue: 1
+  - cellColumns: 6
+    cellRows: 6
+    mazeClearLayers:
+    - red: 1
+      green: 0
+      blue: 0
+    - red: 0
+      green: 1
+      blue: 0
+    - red: 0
+      green: 0
+      blue: 1
+  - cellColumns: 7
+    cellRows: 7
+    mazeClearLayers:
+    - red: 1
+      green: 0
+      blue: 0
+    - red: 0
+      green: 1
+      blue: 0
+    - red: 0
+      green: 0
       blue: 1
   beyondLevel:
     cellColumns: 10
@@ -791,6 +849,25 @@ MonoBehaviour:
     - red: 0
       green: 0
       blue: 1
+--- !u!114 &515553765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515553761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b35b5c19fc812348807e09b4790d4c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  mazeNumber: 1
+  mazeValue: 10
+  lastFilter: 6
+  freeFilterShifts: 3
+  penalty: 0
+  penaltyMultiplier: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

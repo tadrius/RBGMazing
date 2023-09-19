@@ -12,17 +12,23 @@ public class GameManager : MonoBehaviour
     ColorPicker colorPicker;
     LevelManager levelManager;
     Maze maze;
+    Scoreboard scoreboard;
+
+    Level currentLevel;
 
     private void Awake()
     {
         maze = FindObjectOfType<Maze>();
-        levelManager = GetComponent<LevelManager>();
         colorPicker = FindObjectOfType<ColorPicker>();
+        levelManager = GetComponent<LevelManager>();
+        scoreboard = GetComponent<Scoreboard>();
     }
 
     private void Start()
     {
-        maze.Generate(levelManager.GetCurrentLevel());
+        currentLevel = levelManager.GetCurrentLevel();
+        maze.Generate(currentLevel);
+        scoreboard.LoadLevelValues(currentLevel);
     }
 
     private void Update()
@@ -31,9 +37,15 @@ public class GameManager : MonoBehaviour
         RepositionMaze();
         if (MazeComplete())
         {
+            // evaluate the current maze
+            scoreboard.UpdateScore();
+
+            // prepare the next maze
             levelManager.IncreaseCurrentLevel();
+            currentLevel = levelManager.GetCurrentLevel();
             maze.Generate(levelManager.GetCurrentLevel());
             colorPicker.Reset();
+            scoreboard.LoadLevelValues(currentLevel);
         }
     }
 

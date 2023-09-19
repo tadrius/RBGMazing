@@ -6,11 +6,13 @@ public class Mover : MonoBehaviour
 {
     Avatar avatar;
     CellGrid grid;
+    Scoreboard scoreboard;
 
     private void Awake()
     {
         avatar = GetComponent<Avatar>();
         grid = FindObjectOfType<CellGrid>();
+        scoreboard = FindObjectOfType<Scoreboard>();
     }
 
     public void Move(Vector2 direction)
@@ -35,25 +37,19 @@ public class Mover : MonoBehaviour
         // return if no direction is indicated
         if (yMove == 0 && xMove == 0) { return; }
 
-        // check if the adjacent tile in the indicated direction is a valid destination (does not match colors with the avatar)
+        // determine the destination coordinates
         Vector2Int destinationCoordinates = new (avatar.Coordinates.x + xMove, avatar.Coordinates.y + yMove);
         
+        // if the coordinates have a corresponding cell and the path is not blocked
         if (grid.CellsByCoordinates.ContainsKey(destinationCoordinates) 
             && !PathIsBlocked(avatar, destinationCoordinates))
         {
-
-            // find the furthest valid destination in the indicated direction
-            /*Vector2Int candidateCoordinates = new Vector2Int(destinationCoordinates.x + xMove, destinationCoordinates.y + yMove);
-            while (grid.CellsByCoordinates.ContainsKey(candidateCoordinates) 
-                && !PathIsBlocked(avatar, destinationCoordinates))
-            {
-                destinationCoordinates = new Vector2Int(candidateCoordinates.x, candidateCoordinates.y);
-                candidateCoordinates += new Vector2Int(xMove, yMove);
-            }*/
-
-            // move to the furthest valid destination 
+            // move to the destination 
             transform.position = grid.GetCellPositionFromCoordinates(destinationCoordinates);
             avatar.Coordinates = destinationCoordinates;
+
+            // update scoreboard
+            scoreboard.OnAvatarMove();
         }
     }
 

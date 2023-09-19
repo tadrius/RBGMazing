@@ -740,7 +740,16 @@ MonoBehaviour:
   beyondLevel:
     cellColumns: 10
     cellRows: 10
-    mazeLayers: []
+    mazeLayers:
+    - red: 1
+      green: 0
+      blue: 0
+    - red: 0
+      green: 1
+      blue: 0
+    - red: 0
+      green: 0
+      blue: 1
 --- !u!114 &515553765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -757,7 +766,6 @@ MonoBehaviour:
   mazeValue: 10
   penalty: 0
   penaltyMultiplier: 1
-  freeFilterShifts: 3
   lastFilter: 6
 --- !u!1 &519420028
 GameObject:
@@ -1786,7 +1794,6 @@ MonoBehaviour:
   mazeNumberText: {fileID: 2085214942}
   scoreText: {fileID: 1741977472}
   lastFilterText: {fileID: 1018876295}
-  freeShiftsText: {fileID: 1390483875}
   penaltyText: {fileID: 318208070}
   multiplierText: {fileID: 1865831462}
 --- !u!1 &918651412
@@ -2703,7 +2710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1390483874
 RectTransform:
   m_ObjectHideFlags: 0

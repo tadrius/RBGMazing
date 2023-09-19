@@ -8,7 +8,6 @@ public class Scoreboard : MonoBehaviour
     [SerializeField] int mazeValue = 10;
     [SerializeField] int penalty = 0;
     [SerializeField] int penaltyMultiplier = 1;
-    [SerializeField] int freeFilterShifts = 3;
     [SerializeField] ColorNames lastFilter = ColorNames.White;
 
     ColorFilter filter;
@@ -17,7 +16,6 @@ public class Scoreboard : MonoBehaviour
     public int MazeValue { get {  return mazeValue; } }
     public int Penalty { get { return penalty; } }
     public int PenaltyMultiplier { get {  return penaltyMultiplier; } }
-    public int FreeFilterShifts { get { return freeFilterShifts; } }
     public ColorNames LastFilter { get { return lastFilter; } }
 
     private void Awake()
@@ -33,7 +31,6 @@ public class Scoreboard : MonoBehaviour
     public void LoadLevelValues(Level level)
     {
         mazeValue = level.cellColumns * level.cellRows;
-        freeFilterShifts = level.mazeLayers.Count;
         lastFilter = GetColorFilterName();
         penalty = 0;
         penaltyMultiplier = 1;
@@ -41,19 +38,14 @@ public class Scoreboard : MonoBehaviour
 
     public void OnAvatarMove()
     {
-        penalty += penaltyMultiplier;
+        // increase penalty up to the value of the maze
+        penalty = Mathf.Min(mazeValue, penalty + penaltyMultiplier);
 
         ColorNames currentFilter = GetColorFilterName();
         if (lastFilter != currentFilter)
         {
             lastFilter = currentFilter;
-            if (freeFilterShifts <= 0)
-            {
-                penaltyMultiplier++;
-            } else
-            {
-                freeFilterShifts = Mathf.Max(freeFilterShifts - 1, 0);
-            }
+            penaltyMultiplier++;
         }
     }
 

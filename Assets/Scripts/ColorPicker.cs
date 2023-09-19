@@ -33,7 +33,7 @@ public class ColorPicker : MonoBehaviour
     {
         Vector2 relativePointerPosition = pointerPosition - new Vector2(transform.position.x, transform.position.y); // get pointer position relative to the color picker
 
-        if (Vector2.Distance(relativePointerPosition, Vector2.zero) < centerRadius)
+        if (Vector2.Distance(relativePointerPosition, Vector2.zero) < (centerRadius * transform.lossyScale.x))
         {
             PickDefault();
         }

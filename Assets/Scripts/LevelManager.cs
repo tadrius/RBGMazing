@@ -6,29 +6,31 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
 
-    [SerializeField] int currentLevel = 0;
+    [SerializeField] int levelIndex = 0;
     [SerializeField] List<Level> levels;
     [Tooltip("Beyond level will define all maze beyond the defined levels.")]
     [SerializeField] Level beyondLevel;
 
+    public int LevelIndex { get { return levelIndex; } }
+
     public void Restart()
     {
-        currentLevel = 0;
+        levelIndex = 0;
     }
 
-    public void IncreaseCurrentLevel()
+    public void IncrementLevelIndex()
     {
-        currentLevel++;
+        levelIndex++;
     }
 
     public Level GetCurrentLevel()
     {
-        if (currentLevel >= levels.Count)
+        if (levelIndex >= levels.Count)
         {
             return beyondLevel;
         } else
         {
-            return levels[currentLevel];
+            return levels[levelIndex];
         }
     }
 

@@ -13,6 +13,15 @@ public class Scoreboard : MonoBehaviour
 
     ColorShifter shifter;
 
+    public int Score { get { return score; } }
+    public int MazeValue { get {  return mazeValue; } }
+    public ColorNames LastFilter { get {  return lastFilter; } }
+    public int FreeFilterShifts { get {  return freeFilterShifts; } }
+    public int Penalty { get { return penalty; } }
+    public int PenaltyMultiplier { get {  return penaltyMultiplier; } }
+
+
+
     private void Awake()
     {
         shifter = FindObjectOfType<ColorShifter>();

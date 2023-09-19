@@ -862,7 +862,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  mazeNumber: 1
   mazeValue: 10
   lastFilter: 6
   freeFilterShifts: 3
@@ -1785,6 +1784,7 @@ GameObject:
   - component: {fileID: 915296451}
   - component: {fileID: 915296450}
   - component: {fileID: 915296449}
+  - component: {fileID: 915296453}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1878,6 +1878,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &915296453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915296448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37224ae0100031445bc687509e5217eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  valueText: {fileID: 625053918}
+  mazeNumberText: {fileID: 2085214942}
+  scoreText: {fileID: 1741977472}
+  lastFilterText: {fileID: 1018876295}
+  freeShiftsText: {fileID: 1390483875}
+  penaltyText: {fileID: 318208070}
+  multiplierText: {fileID: 1865831462}
 --- !u!1 &918651412
 GameObject:
   m_ObjectHideFlags: 0

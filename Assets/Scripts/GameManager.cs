@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
             scoreboard.UpdateScore();
 
             // prepare the next maze
-            levelManager.IncreaseCurrentLevel();
+            levelManager.IncrementLevelIndex();
             currentLevel = levelManager.GetCurrentLevel();
             maze.Generate(levelManager.GetCurrentLevel());
             colorPicker.Reset();

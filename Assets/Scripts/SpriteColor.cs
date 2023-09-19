@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class SpriteColor : MonoBehaviour
 {
-    [SerializeField] bool r = true, g = true, b = true;
+    [SerializeField] bool redActive = true, greenActive = true, blueActive = true;
     [SerializeField] bool includeInactiveColors = false;
 
     SpriteRenderer spriteRenderer;
-    ColorShifter colorShifter;
+    ColorFilter colorFilter;
 
-    public bool R { get { return r; } set { r = value; } }
-    public bool G { get { return g; } set { g = value; } }
-    public bool B { get { return b; } set { b = value; } }
+    public bool RedActive { get { return redActive; } }
+    public bool GreenActive { get { return greenActive; } }
+    public bool BlueActive { get { return blueActive; } }
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        colorShifter = FindObjectOfType<ColorShifter>();
+        colorFilter = FindObjectOfType<ColorFilter>();
     }
 
-    public void ApplyColors(bool r, bool g, bool b)
+    public void SetColorsActive(bool redActive, bool greenActive, bool blueActive)
     {
-        this.r = r;
-        this.g = g;
-        this.b = b;
+        this.redActive = redActive;
+        this.greenActive = greenActive;
+        this.blueActive = blueActive;
 
         ApplyColorChannels();
     }
@@ -35,27 +35,27 @@ public class SpriteColor : MonoBehaviour
 
         if (includeInactiveColors)
         {
-            rAmount = r ? 1f : 0f;
-            gAmount = g ? 1f : 0f;
-            bAmount = b ? 1f : 0f;
+            rAmount = redActive ? 1f : 0f;
+            gAmount = greenActive ? 1f : 0f;
+            bAmount = blueActive ? 1f : 0f;
         }
         else
         { 
-            rAmount = colorShifter.RActive && r ? 1f : 0f;
-            gAmount = colorShifter.GActive && g ? 1f : 0f;
-            bAmount = colorShifter.BActive && b ? 1f : 0f;
+            rAmount = colorFilter.RActive && redActive ? 1f : 0f;
+            gAmount = colorFilter.GActive && greenActive ? 1f : 0f;
+            bAmount = colorFilter.BActive && blueActive ? 1f : 0f;
         }
         spriteRenderer.color = new Color(rAmount, gAmount, bAmount);
     }
 
-    public int GetMatchingColorCount(SpriteColor other)
+    public int CountMatchingColorChannels(SpriteColor other)
     {
         int count = 0;
 
         // ignore colors that are inactive in color channels
-        if (colorShifter.RActive && r && other.R) { count++; }
-        if (colorShifter.GActive && g && other.G) { count++; }
-        if (colorShifter.BActive && b && other.B) { count++; }
+        if (colorFilter.RActive && redActive && other.RedActive) { count++; }
+        if (colorFilter.GActive && greenActive && other.GreenActive) { count++; }
+        if (colorFilter.BActive && blueActive && other.BlueActive) { count++; }
 
         return count;
     }

@@ -18,25 +18,24 @@ public class Wall : MonoBehaviour
 
     private void Start()
     {
-        SetAllColors(mainColor.R, mainColor.G, mainColor.B);
+        SetAllColors(mainColor.RedActive, mainColor.GreenActive, mainColor.BlueActive);
     }
 
-    // TO-DO - remove Update after testing (colors only need updating when Maze is made)
     private void Update()
     {
-        SetAllColors(mainColor.R, mainColor.G, mainColor.B);
-    }
-
-    public void SetName(Vector2Int coordinates)
-    {
-        name = $"{name} {coordinates}";
+        SetAllColors(mainColor.RedActive, mainColor.GreenActive, mainColor.BlueActive);
     }
 
     public void SetAllColors(bool r, bool g, bool b)
     {
         foreach (var item in allColors)
         {
-            item.ApplyColors(r, g, b);
+            item.SetColorsActive(r, g, b);
         }
+    }
+
+    public void SetName(Vector2Int coordinates)
+    {
+        name = $"{name} {coordinates}";
     }
 }

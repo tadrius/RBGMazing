@@ -51,7 +51,7 @@ public class CellGrid : MonoBehaviour
     {
         foreach(Wall wall in walls)
         {
-            wall.MainColor.ApplyColors(true, true, true);
+            wall.MainColor.SetColorsActive(true, true, true);
         }
     }
 

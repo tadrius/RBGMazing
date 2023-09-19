@@ -729,126 +729,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93891e05d3b6618449d161d222e5e2d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 0
+  levelIndex: 0
   levels:
   - cellColumns: 3
     cellRows: 1
-    mazeClearLayers:
+    mazeLayers:
     - red: 1
       green: 1
-      blue: 1
-  - cellColumns: 2
-    cellRows: 2
-    mazeClearLayers:
-    - red: 1
-      green: 1
-      blue: 1
-  - cellColumns: 2
-    cellRows: 2
-    mazeClearLayers:
-    - red: 1
-      green: 0
-      blue: 1
-  - cellColumns: 3
-    cellRows: 3
-    mazeClearLayers:
-    - red: 0
-      green: 1
-      blue: 1
-  - cellColumns: 3
-    cellRows: 3
-    mazeClearLayers:
-    - red: 1
-      green: 1
-      blue: 0
-    - red: 0
-      green: 1
-      blue: 1
-  - cellColumns: 4
-    cellRows: 4
-    mazeClearLayers:
-    - red: 1
-      green: 0
-      blue: 1
-    - red: 0
-      green: 1
-      blue: 1
-  - cellColumns: 4
-    cellRows: 4
-    mazeClearLayers:
-    - red: 1
-      green: 0
-      blue: 1
-    - red: 0
-      green: 1
-      blue: 0
-  - cellColumns: 5
-    cellRows: 5
-    mazeClearLayers:
-    - red: 1
-      green: 1
-      blue: 0
-    - red: 0
-      green: 0
-      blue: 1
-  - cellColumns: 5
-    cellRows: 5
-    mazeClearLayers:
-    - red: 0
-      green: 1
-      blue: 0
-    - red: 0
-      green: 0
-      blue: 1
-  - cellColumns: 6
-    cellRows: 6
-    mazeClearLayers:
-    - red: 1
-      green: 0
-      blue: 0
-    - red: 0
-      green: 1
-      blue: 0
-    - red: 0
-      green: 0
-      blue: 1
-  - cellColumns: 6
-    cellRows: 6
-    mazeClearLayers:
-    - red: 1
-      green: 0
-      blue: 0
-    - red: 0
-      green: 1
-      blue: 0
-    - red: 0
-      green: 0
-      blue: 1
-  - cellColumns: 7
-    cellRows: 7
-    mazeClearLayers:
-    - red: 1
-      green: 0
-      blue: 0
-    - red: 0
-      green: 1
-      blue: 0
-    - red: 0
-      green: 0
       blue: 1
   beyondLevel:
     cellColumns: 10
     cellRows: 10
-    mazeClearLayers:
-    - red: 1
-      green: 0
-      blue: 0
-    - red: 0
-      green: 1
-      blue: 0
-    - red: 0
-      green: 0
-      blue: 1
+    mazeLayers: []
 --- !u!114 &515553765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -863,10 +755,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   mazeValue: 10
-  lastFilter: 6
-  freeFilterShifts: 3
   penalty: 0
   penaltyMultiplier: 1
+  freeFilterShifts: 3
+  lastFilter: 6
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3532,9 +3424,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d97079ca6f0504584a6803aa6002ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  r: 1
-  g: 1
-  b: 1
+  redActive: 1
+  greenActive: 1
+  blueActive: 1
   includeInactiveColors: 0
 --- !u!212 &1594402677
 SpriteRenderer:
@@ -4597,10 +4489,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2050573846}
-  - component: {fileID: 2050573847}
-  - component: {fileID: 2050573849}
   - component: {fileID: 2050573848}
   - component: {fileID: 2050573850}
+  - component: {fileID: 2050573847}
+  - component: {fileID: 2050573849}
   m_Layer: 0
   m_Name: Color Picker
   m_TagString: Untagged
@@ -4740,7 +4632,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2050573845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a3e2d3e0efc16f4293f6516d2e90452, type: 3}
+  m_Script: {fileID: 11500000, guid: a0c34aff80e0f974fa49de1bd809869d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rActive: 1

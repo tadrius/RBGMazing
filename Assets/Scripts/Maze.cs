@@ -24,7 +24,7 @@ public class Maze : MonoBehaviour
     {
         grid.Generate(level.cellColumns, level.cellRows);
 
-        foreach (ColorChannels mazeLayer in level.mazeClearLayers)
+        foreach (PathClearChannels mazeLayer in level.mazeLayers)
         {
             DrawMaze(mazeLayer);
         }
@@ -39,7 +39,7 @@ public class Maze : MonoBehaviour
 
     // using Wilson's algorithm (https://en.wikipedia.org/wiki/Maze_generation_algorithm)
     // pathClearChannels determines which color channels will be removed from walls along paths
-    void DrawMaze(ColorChannels pathClearChannels)
+    void DrawMaze(PathClearChannels pathClearChannels)
     {
         List<Cell> remainingCells = new (grid.Cells);
         List<Cell> mazeCells = new ();
@@ -55,7 +55,7 @@ public class Maze : MonoBehaviour
         }
     }
 
-    List<Cell> CreatePath(List<Cell> remainingCells, List<Cell> mazeCells, ColorChannels pathClearChannels)
+    List<Cell> CreatePath(List<Cell> remainingCells, List<Cell> mazeCells, PathClearChannels pathClearChannels)
     {
         // start the path at an arbitrary cell
         List<Cell> path = new();
@@ -102,7 +102,7 @@ public class Maze : MonoBehaviour
         return path;
     }
 
-    void ClearPathWalls(List<Cell> path, ColorChannels pathClearChannels)
+    void ClearPathWalls(List<Cell> path, PathClearChannels pathClearChannels)
     {
         // clear walls
         for (int i = 0; i < path.Count - 1; i++)
@@ -111,9 +111,9 @@ public class Maze : MonoBehaviour
             SpriteColor wallColor = wall.MainColor;
 
             wall.SetAllColors(
-                wallColor.R && !pathClearChannels.red,
-                wallColor.G && !pathClearChannels.green,
-                wallColor.B && !pathClearChannels.blue
+                wallColor.RedActive && !pathClearChannels.red,
+                wallColor.GreenActive && !pathClearChannels.green,
+                wallColor.BlueActive && !pathClearChannels.blue
             );
         }
     }

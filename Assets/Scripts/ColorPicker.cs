@@ -14,13 +14,13 @@ public class ColorPicker : MonoBehaviour
     [SerializeField] Vector2 brAngleRange;
 
     float indicatorAngle;
-    ColorShifter shifter;
+    ColorFilter filter;
 
     public Transform Indicator { get { return indicator; } }
 
     private void Awake()
     {
-        shifter = GetComponent<ColorShifter>();
+        filter = GetComponent<ColorFilter>();
     }
 
     private void Start()
@@ -31,7 +31,7 @@ public class ColorPicker : MonoBehaviour
 
     public void Reset()
     {
-        PickDefault();
+        PickDefaultColor();
     }
 
     public void PickColor(Vector2 pointerPosition)
@@ -40,7 +40,7 @@ public class ColorPicker : MonoBehaviour
 
         if (Vector2.Distance(relativePointerPosition, Vector2.zero) < (centerRadius * transform.lossyScale.x))
         {
-            PickDefault();
+            PickDefaultColor();
         }
         else
         {
@@ -65,36 +65,36 @@ public class ColorPicker : MonoBehaviour
         indicatorAngle = angle;
     }
 
-    public void PickDefault()
+    public void PickDefaultColor()
     {
         RotateIndicator(Vector2.SignedAngle(indicator.localPosition, Vector2.down));
         CalculateIndicatorAngle();
-        shifter.ActivateRGB();
+        filter.ActivateRGB();
     }
 
     void PickColor()
     {
         if (indicatorAngle >= rAngleRange.x &&  indicatorAngle < rAngleRange.y)
         {
-            shifter.ActivateR();
+            filter.ActivateR();
         } else if (indicatorAngle >= rgAngleRange.x && indicatorAngle < rgAngleRange.y)
         {
-            shifter.ActivateRG();
+            filter.ActivateRG();
         } else if (indicatorAngle >= gAngleRange.x && indicatorAngle < gAngleRange.y)
         {
-            shifter.ActivateG();
+            filter.ActivateG();
         } else if (indicatorAngle >= gbAngleRange.x && indicatorAngle < gbAngleRange.y)
         {
-            shifter.ActivateGB();
+            filter.ActivateGB();
         } else if (indicatorAngle >= bAngleRange.x && indicatorAngle < bAngleRange.y)
         {
-            shifter.ActivateB();
+            filter.ActivateB();
         } else if (indicatorAngle >= brAngleRange.x && indicatorAngle < brAngleRange.y)
         {
-            shifter.ActivateBR();
+            filter.ActivateBR();
         } else
         {
-            shifter.ActivateRGB();
+            filter.ActivateRGB();
         }
     }
 

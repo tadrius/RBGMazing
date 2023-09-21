@@ -5,12 +5,11 @@ using TMPro;
 
 public class ValueDisplay : MonoBehaviour
 {
-    [SerializeField] TMP_Text valueText;
-    [SerializeField] TMP_Text mazeNumberText;
     [SerializeField] TMP_Text scoreText;
-    [SerializeField] TMP_Text lastFilterText;
-    [SerializeField] TMP_Text penaltyText;
-    [SerializeField] TMP_Text multiplierText;
+    [SerializeField] TMP_Text ActiveFilterText;
+    [SerializeField] TMP_Text MovePenaltyText;
+    [SerializeField] TMP_Text mazeNumberText;
+    [SerializeField] TMP_Text mazeValueText;
 
     Scoreboard scoreboard;
     LevelManager levelManager;
@@ -23,11 +22,57 @@ public class ValueDisplay : MonoBehaviour
 
     private void Update()
     {
-        valueText.text = $"Value: {scoreboard.MazeValue}";
-        mazeNumberText.text = $"Maze: {levelManager.LevelIndex}";
-        scoreText.text = $"Score: {scoreboard.Score}";
-        lastFilterText.text = $"Last Filter: {scoreboard.LastFilter}";
-        penaltyText.text = $"Penalty: {scoreboard.Penalty}";
-        multiplierText.text = $"Multiplier: {scoreboard.PenaltyMultiplier}";
+        UpdateScore();
+        UpdateActiveFilter();
+        UpdateMovePenalty();
+        UpdateMazeNumber();
+        UpdateMazeValue();
+    }
+
+    void UpdateScore()
+    {
+        scoreText.text = $"{scoreboard.Score}";
+    }
+
+    void UpdateActiveFilter()
+    {
+        if (scoreboard.ActiveFilter == scoreboard.BufferFilter)
+        {
+            ActiveFilterText.text = $"{scoreboard.ActiveFilter}";
+        } else
+        {
+            ActiveFilterText.text = $"{scoreboard.ActiveFilter} (>{scoreboard.BufferFilter})";
+        }
+    }
+
+    void UpdateMovePenalty()
+    {
+        MovePenaltyText.text = $"{scoreboard.MovePenalty}";
+        if (scoreboard.ActiveFilter == scoreboard.BufferFilter)
+        {
+            MovePenaltyText.text = $"{scoreboard.MovePenalty}";
+        }
+        else
+        {
+            MovePenaltyText.text = $"{scoreboard.MovePenalty} (+1)";
+        }
+    }
+
+    void UpdateMazeNumber()
+    {
+        mazeNumberText.text = $"{levelManager.LevelIndex}";
+    }
+
+    void UpdateMazeValue()
+    {
+        if (scoreboard.TotalPenalty == 0)
+        {
+            mazeValueText.text = $"{scoreboard.MazeValue}";
+
+        }
+        else
+        {
+            mazeValueText.text = $"{scoreboard.MazeValue} (-{scoreboard.TotalPenalty})";
+        }
     }
 }

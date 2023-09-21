@@ -6,17 +6,19 @@ public class Scoreboard : MonoBehaviour
 {
     [SerializeField] int score = 0;
     [SerializeField] int mazeValue = 10;
-    [SerializeField] int penalty = 0;
-    [SerializeField] int penaltyMultiplier = 1;
-    [SerializeField] ColorNames lastFilter = ColorNames.White;
+    [SerializeField] int totalPenalty = 0;
+    [SerializeField] int movePenalty = 0;
+    [SerializeField] ColorNames activeFilter = ColorNames.White;
+    [SerializeField] ColorNames bufferFilter;
 
     ColorFilter filter;
 
     public int Score { get { return score; } }
     public int MazeValue { get {  return mazeValue; } }
-    public int Penalty { get { return penalty; } }
-    public int PenaltyMultiplier { get {  return penaltyMultiplier; } }
-    public ColorNames LastFilter { get { return lastFilter; } }
+    public int TotalPenalty { get { return totalPenalty; } }
+    public int MovePenalty { get {  return movePenalty; } }
+    public ColorNames ActiveFilter { get { return activeFilter; } }
+    public ColorNames BufferFilter { get { return bufferFilter; } }
 
     private void Awake()
     {
@@ -25,27 +27,32 @@ public class Scoreboard : MonoBehaviour
 
     public void UpdateScore()
     {
-        score += mazeValue - penalty;
+        score += mazeValue - totalPenalty;
     }
 
     public void LoadLevelValues(Level level)
     {
         mazeValue = level.cellColumns * level.cellRows;
-        lastFilter = GetColorFilterName();
-        penalty = 0;
-        penaltyMultiplier = 1;
+        activeFilter = GetColorFilterName();
+        bufferFilter = GetColorFilterName();
+        totalPenalty = 0;
+        movePenalty = 0;
+    }
+
+    public void OnFilterColors()
+    {
+        bufferFilter = GetColorFilterName();
     }
 
     public void OnAvatarMove()
     {
         // increase penalty up to the value of the maze
-        penalty = Mathf.Min(mazeValue, penalty + penaltyMultiplier);
+        totalPenalty = Mathf.Min(mazeValue, totalPenalty + movePenalty);
 
-        ColorNames currentFilter = GetColorFilterName();
-        if (lastFilter != currentFilter)
+        if (activeFilter != bufferFilter)
         {
-            lastFilter = currentFilter;
-            penaltyMultiplier++;
+            activeFilter = bufferFilter;
+            movePenalty++;
         }
     }
 

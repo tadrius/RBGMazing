@@ -12,13 +12,15 @@ public class ColorFilter : MonoBehaviour
     public bool BActive { get { return bActive; } }
 
     SpriteColor[] globalColors;
+    Scoreboard scoreboard;
 
     private void Awake()
     {
         globalColors = FindObjectsOfType<SpriteColor>();
+        scoreboard = FindObjectOfType<Scoreboard>();
     }
 
-    void ActivateColorChannels(bool rActive, bool gActive, bool bActive)
+    void FilterColors(bool rActive, bool gActive, bool bActive)
     {
         this.rActive = rActive;
         this.gActive = gActive;
@@ -27,40 +29,41 @@ public class ColorFilter : MonoBehaviour
         {
             color.ApplyColorChannels();
         }
+        scoreboard.OnFilterColors();
     }
 
     public void ActivateR()
     {
-        ActivateColorChannels(true, false, false);
+        FilterColors(true, false, false);
     }
 
     public void ActivateRG()
     {
-        ActivateColorChannels(true, true, false);
+        FilterColors(true, true, false);
     }
 
     public void ActivateG()
     {
-        ActivateColorChannels(false, true, false);
+        FilterColors(false, true, false);
     }
 
     public void ActivateGB()
     {
-        ActivateColorChannels(false, true, true);
+        FilterColors(false, true, true);
     }
 
     public void ActivateB()
     {
-        ActivateColorChannels(false, false, true);
+        FilterColors(false, false, true);
     }
 
     public void ActivateBR()
     {
-        ActivateColorChannels(true, false, true);
+        FilterColors(true, false, true);
     }
 
     public void ActivateRGB()
     {
-        ActivateColorChannels(true, true, true);
+        FilterColors(true, true, true);
     }
 }

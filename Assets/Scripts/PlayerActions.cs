@@ -11,7 +11,6 @@ public class PlayerActions : MonoBehaviour
     bool moved;
     bool pointed;
 
-
     bool clickerDown;
     Vector2 moveVector;
     Vector2 pointVector;

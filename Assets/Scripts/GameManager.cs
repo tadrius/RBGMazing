@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    [SerializeField] [Range(0.0001f, 2f)] float mazeScreenProportion = 1f;
+    [SerializeField] [Range(0.00001f, 2f)] float mazeScreenProportion = 1f;
     [SerializeField] float mazeScaleConstant = 1f;
     [SerializeField] float mazeYOffset = 0f;
 
@@ -67,8 +67,8 @@ public class GameManager : MonoBehaviour
     void RescaleMaze()
     {
         // TODO - delete log
-        Debug.Log($"Screen Width: {Screen.currentResolution.width}, Height: {Screen.currentResolution.height}, Safe Width: {Screen.safeArea.width}, Safe Height: {Screen.safeArea.height}");
-
+/*        Debug.Log($"Screen Width: {Screen.currentResolution.width}, Height: {Screen.currentResolution.height}, Safe Width: {Screen.safeArea.width}, Safe Height: {Screen.safeArea.height}");
+*/
         // TODO - incorporate safe area for mobile devices
         float mazeScale = mazeScreenProportion * mazeScaleConstant / Screen.currentResolution.height;
 

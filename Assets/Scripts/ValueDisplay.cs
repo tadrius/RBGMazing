@@ -54,7 +54,7 @@ public class ValueDisplay : MonoBehaviour
         }
         else
         {
-            MovePenaltyText.text = $"{scoreboard.MovePenalty} (+1)";
+            MovePenaltyText.text = $"{scoreboard.MovePenalty} (+{scoreboard.MovePenaltyIncrease})";
         }
     }
 

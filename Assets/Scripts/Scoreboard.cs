@@ -8,8 +8,13 @@ public class Scoreboard : MonoBehaviour
     [SerializeField] int mazeValue = 10;
     [SerializeField] int totalPenalty = 0;
     [SerializeField] int movePenalty = 0;
+    [SerializeField] int movePenaltyIncrease = 0;
     [SerializeField] ColorNames activeFilter = ColorNames.White;
     [SerializeField] ColorNames bufferFilter;
+
+    [SerializeField] int penaltyChangeAll = 0;
+    [SerializeField] int penaltyChangeSecondary = 1;
+    [SerializeField] int penaltyChangePrimary = 2;
 
     ColorFilter filter;
 
@@ -17,6 +22,7 @@ public class Scoreboard : MonoBehaviour
     public int MazeValue { get {  return mazeValue; } }
     public int TotalPenalty { get { return totalPenalty; } }
     public int MovePenalty { get {  return movePenalty; } }
+    public int MovePenaltyIncrease { get { return movePenaltyIncrease; } }
     public ColorNames ActiveFilter { get { return activeFilter; } }
     public ColorNames BufferFilter { get { return bufferFilter; } }
 
@@ -33,15 +39,15 @@ public class Scoreboard : MonoBehaviour
     public void LoadLevelValues(Level level)
     {
         mazeValue = level.cellColumns * level.cellRows;
-        activeFilter = GetColorFilterName();
-        bufferFilter = GetColorFilterName();
+        GetColorFilterValues(out activeFilter, out int x);
+        GetColorFilterValues(out bufferFilter, out movePenaltyIncrease);
         totalPenalty = 0;
         movePenalty = 0;
     }
 
     public void OnFilterColors()
     {
-        bufferFilter = GetColorFilterName();
+        GetColorFilterValues(out bufferFilter, out movePenaltyIncrease);
     }
 
     public void OnAvatarMove()
@@ -56,32 +62,37 @@ public class Scoreboard : MonoBehaviour
         }
     }
 
-    ColorNames GetColorFilterName()
+    void GetColorFilterValues(out ColorNames name, out int movePenaltyIncrease)
     {
-        if (filter.RActive && filter.GActive && filter.BActive)
+        if (filter.RActive && !filter.GActive && !filter.BActive)
         {
-            return ColorNames.White;
-        } else if (filter.RActive && !filter.GActive && !filter.BActive)
-        {
-            return ColorNames.Red;
+            name = ColorNames.Red;
+            movePenaltyIncrease = penaltyChangePrimary;
         } else if (!filter.RActive && filter.GActive && !filter.BActive)
         {
-            return ColorNames.Green;
+            name = ColorNames.Green;
+            movePenaltyIncrease = penaltyChangePrimary;
         } else if (!filter.RActive && !filter.GActive && filter.BActive)
         {
-            return ColorNames.Blue;
+            name = ColorNames.Blue;
+            movePenaltyIncrease = penaltyChangePrimary;
         } else if (filter.RActive && filter.GActive && !filter.BActive)
         {
-            return ColorNames.Yellow;
+            name = ColorNames.Yellow;
+            movePenaltyIncrease = penaltyChangeSecondary;
         } else if (filter.RActive && !filter.GActive && filter.BActive)
         {
-            return ColorNames.Violet;
+            name = ColorNames.Violet;
+            movePenaltyIncrease = penaltyChangeSecondary;
         } else if (!filter.RActive && filter.GActive && filter.BActive)
         {
-            return ColorNames.Cyan;
-        } else
+            name = ColorNames.Cyan;
+            movePenaltyIncrease = penaltyChangeSecondary;
+        }
+        else
         {
-            return ColorNames.Black;
+            name = ColorNames.White;
+            movePenaltyIncrease = penaltyChangeAll;
         }
     }
 

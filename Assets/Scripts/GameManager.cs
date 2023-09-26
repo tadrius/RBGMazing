@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
 
     bool MazeComplete()
     {
-        return maze.GoalReached();
+        return maze.GoalsCleared();
     }
 
     void RepositionMaze()

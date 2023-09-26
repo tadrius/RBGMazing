@@ -6,12 +6,12 @@ using UnityEngine;
 public class Maze : MonoBehaviour
 {
     [SerializeField] Vector2Int startPosition;
-    [SerializeField] Vector2Int endPosition;
 
     [SerializeField] Avatar avatar;
     [SerializeField] GameObject goalIndicator;
 
     CellGrid grid;
+    Dictionary<Vector2Int, GameObject> goalsByCoordinates;
 
     public CellGrid Grid { get { return grid; } }
 
@@ -29,12 +29,38 @@ public class Maze : MonoBehaviour
             DrawMaze(mazeLayer);
         }
 
-        // TODO - improve startPosition and endPosition selection
-        avatar.Coordinates = startPosition;
         avatar.transform.position = grid.GetCellPositionFromCoordinates(avatar.Coordinates);
+        AddGoals(level.numberOfGoals);
+    }
 
-        endPosition = new Vector2Int(level.cellColumns - 1, level.cellRows - 1);
-        goalIndicator.transform.position = grid.GetCellPositionFromCoordinates(endPosition);
+    // TODO - create object pool for goals
+    void AddGoals(int numberOfGoals)
+    {
+        List<Cell> cells = new(grid.Cells);
+        goalsByCoordinates = new();
+        cells.Remove(grid.GetCellFromCoordinates(avatar.Coordinates));
+        for (int i = 0; i < numberOfGoals; i++)
+        {
+            if (cells.Count == 0) { return; }
+
+            int index = Random.Range(0, cells.Count);
+            Cell cell = cells[index];
+            goalsByCoordinates.Add(cell.Coordinates, Instantiate(goalIndicator, cell.transform.position, Quaternion.identity, transform));
+            cells.RemoveAt(index);
+        }
+    }
+
+    public bool GoalAtCoordinates(Vector2Int coordinates)
+    {
+        return goalsByCoordinates.ContainsKey(coordinates);
+    }
+
+    // TODO - create object pool for goals
+    public void RemoveGoalAtCoordinates(Vector2Int coordinates)
+    {
+        GameObject goal = goalsByCoordinates[coordinates];
+        goalsByCoordinates.Remove(coordinates);
+        Destroy(goal);
     }
 
     // using Wilson's algorithm (https://en.wikipedia.org/wiki/Maze_generation_algorithm)
@@ -123,8 +149,9 @@ public class Maze : MonoBehaviour
         return new List<Vector2Int>() { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
     }
 
-    public bool GoalReached()
+    public bool GoalsCleared()
     {
-        return avatar.Coordinates == endPosition;
+        if (goalsByCoordinates.Count == 0) return true;
+        return false;
     }
 }

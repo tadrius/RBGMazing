@@ -23,6 +23,8 @@ public class CellGrid : MonoBehaviour
     public Dictionary<Vector2, Cell> CellsByCoordinates { get { return cellsByCoordinates; } }
     public List<Cell> Cells { get {  return cells; } }
 
+
+    // TODO - Create the max size grid at the start and just enable/disable cells.
     public void Generate(int cols, int rows)
     {
         // reuse the existing grid if the size is the same

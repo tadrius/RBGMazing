@@ -5,13 +5,13 @@ using UnityEngine;
 public class Mover : MonoBehaviour
 {
     Avatar avatar;
-    CellGrid grid;
+    Maze maze;
     Scoreboard scoreboard;
 
     private void Awake()
     {
         avatar = GetComponent<Avatar>();
-        grid = FindObjectOfType<CellGrid>();
+        maze = FindObjectOfType<Maze>();
         scoreboard = FindObjectOfType<Scoreboard>();
     }
 
@@ -41,12 +41,18 @@ public class Mover : MonoBehaviour
         Vector2Int destinationCoordinates = new (avatar.Coordinates.x + xMove, avatar.Coordinates.y + yMove);
         
         // if the coordinates have a corresponding cell and the path is not blocked
-        if (grid.CellsByCoordinates.ContainsKey(destinationCoordinates) 
+        if (maze.Grid.CellsByCoordinates.ContainsKey(destinationCoordinates) 
             && !PathIsBlocked(avatar, destinationCoordinates))
         {
             // move to the destination 
-            transform.position = grid.GetCellPositionFromCoordinates(destinationCoordinates);
+            transform.position = maze.Grid.GetCellPositionFromCoordinates(destinationCoordinates);
             avatar.Coordinates = destinationCoordinates;
+
+            // check for goal
+            if (maze.GoalAtCoordinates(avatar.Coordinates))
+            {
+                maze.RemoveGoalAtCoordinates(avatar.Coordinates);
+            }
 
             // update scoreboard
             scoreboard.OnAvatarMove();
@@ -55,9 +61,9 @@ public class Mover : MonoBehaviour
 
     bool PathIsBlocked(Avatar avatar, Vector2Int destinationCoordinates)
     {
-        Wall wall = grid.GetAdjoiningWall(
-            grid.GetCellFromCoordinates(avatar.Coordinates),
-            grid.GetCellFromCoordinates(destinationCoordinates));
+        Wall wall = maze.Grid.GetAdjoiningWall(
+            maze.Grid.GetCellFromCoordinates(avatar.Coordinates),
+            maze.Grid.GetCellFromCoordinates(destinationCoordinates));
         return 0 < avatar.Color.CountMatchingColorChannels(wall.MainColor);
     }
 }

@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Scoreboard : MonoBehaviour
 {
-    [SerializeField] int score = 0;
-    [SerializeField] int mazeValue = 10;
-    [SerializeField] int totalPenalty = 0;
-    [SerializeField] int movePenalty = 0;
-    [SerializeField] int movePenaltyIncrease = 0;
-    [SerializeField] ColorNames activeFilter = ColorNames.White;
-    [SerializeField] ColorNames bufferFilter;
-
     [SerializeField] int penaltyChangeAll = 0;
     [SerializeField] int penaltyChangeSecondary = 1;
     [SerializeField] int penaltyChangePrimary = 2;
+
+    int score = 0;
+    int mazeValue = 10;
+    int totalPenalty = 0;
+    int movePenalty = 0;
+    int movePenaltyIncrease = 0;
+    ColorNames activeFilter = ColorNames.White;
+    ColorNames bufferFilter;
 
     ColorFilter filter;
 
